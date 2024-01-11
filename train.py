@@ -211,7 +211,7 @@ def train():
             optimizer.step()
 
             # display
-            if distributed_utils.is_main_process() and iter_i % 10 == 0:
+            if distributed_utils.is_main_process() and (iter_i+1) % int(epoch_size/10) == 0:
                 t1 = time.time()
                 cur_lr = [param_group['lr']  for param_group in optimizer.param_groups]
                 cur_lr_dict = {'lr': cur_lr[0], 'lr_bk': cur_lr[1]}
