@@ -27,58 +27,38 @@ from models import build_model
 def parse_args():
     parser = argparse.ArgumentParser(description='DeTR')
     # GPU
-    parser.add_argument('--cuda', action='store_true', default=False,
-                        help='use cuda.')
-    parser.add_argument('--num_workers', default=4, type=int, 
-                        help='Number of workers used in dataloading')
-    parser.add_argument('--grad_clip_norm', type=float, default=0.1,
-                        help='grad clip.')
+    parser.add_argument('--cuda', action='store_true', default=False, help='use cuda.')
+    parser.add_argument('--num_workers', default=4, type=int,  help='Number of workers used in dataloading')
+    parser.add_argument('--grad_clip_norm', type=float, default=0.1, help='grad clip.')
     
     # Outputs
-    parser.add_argument('--tfboard', action='store_true', default=False,
-                        help='use tensorboard')
-    parser.add_argument('--save_folder', default='weights/', type=str, 
-                        help='path to save weight')
-    parser.add_argument('--eval_epoch', default=10, type=int, 
-                        help='after eval epoch, the model is evaluated on val dataset.')
+    parser.add_argument('--tfboard', action='store_true', default=False, help='use tensorboard')
+    parser.add_argument('--save_folder', default='weights/', type=str, help='path to save weight')
+    parser.add_argument('--eval_epoch', default=10, type=int, help='after eval epoch, the model is evaluated on val dataset.')
     
     # Mixing precision
-    parser.add_argument('--fp16', dest="fp16", action="store_true", default=False,
-                        help="Adopting mix precision training.")
-    parser.add_argument('--vis', dest="vis", action="store_true", default=False,
-                        help="visualize input data.")
+    parser.add_argument('--fp16', dest="fp16", action="store_true", default=False, help="Adopting mix precision training.")
+    parser.add_argument('--vis', dest="vis", action="store_true", default=False, help="visualize input data.")
 
     # Model
-    parser.add_argument('-v', '--version', default='detr_r50', type=str,
-                        help='build DeTR')
-    parser.add_argument('--aux_loss', action='store_true', default=False,
-                        help="Use auxiliary decoding losses (loss at each layer)")
-    parser.add_argument('--use_nms', action='store_true', default=False,
-                        help="Use NMS")
-    parser.add_argument('-p', '--pretrained', default=None, type=str,
-                        help='use coco pretrained')
-    parser.add_argument('-r', '--resume', default=None, type=str,
-                        help='keep training')
+    parser.add_argument('-v', '--version', default='detr_r50', type=str, help='build DeTR')
+    parser.add_argument('--aux_loss', action='store_true', default=False, help="Use auxiliary decoding losses (loss at each layer)")
+    parser.add_argument('--use_nms', action='store_true', default=False, help="Use NMS")
+    parser.add_argument('-p', '--pretrained', default=None, type=str, help='use coco pretrained')
+    parser.add_argument('-r', '--resume', default=None, type=str, help='keep training')
 
     # Dataset
-    parser.add_argument('--root', default='/mnt/share/ssd2/dataset',
-                        help='data root')
-    parser.add_argument('-d', '--dataset', default='coco',
-                        help='coco, voc, widerface, crowdhuman')
+    parser.add_argument('--root', default='/mnt/share/ssd2/dataset', help='data root')
+    parser.add_argument('-d', '--dataset', default='coco', help='coco, voc, widerface, crowdhuman')
     
     # Train trick
-    parser.add_argument('--no_warmup', action='store_true', default=False,
-                        help='do not use warmup')
+    parser.add_argument('--no_warmup', action='store_true', default=False, help='do not use warmup')
 
     # DDP train
-    parser.add_argument('-dist', '--distributed', action='store_true', default=False,
-                        help='distributed training')
-    parser.add_argument('--dist_url', default='env://', 
-                        help='url used to set up distributed training')
-    parser.add_argument('--world_size', default=1, type=int,
-                        help='number of distributed processes')
-    parser.add_argument('--sybn', action='store_true', default=False, 
-                        help='use sybn.')
+    parser.add_argument('-dist', '--distributed', action='store_true', default=False, help='distributed training')
+    parser.add_argument('--dist_url', default='env://', help='url used to set up distributed training')
+    parser.add_argument('--world_size', default=1, type=int, help='number of distributed processes')
+    parser.add_argument('--sybn', action='store_true', default=False, help='use sybn.')
 
     return parser.parse_args()
 
