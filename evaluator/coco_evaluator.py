@@ -64,8 +64,8 @@ class COCOAPIEvaluator():
 
         # start testing
         for index in range(num_images): # all the data in val2017
-            if index % 500 == 0:
-                print('[Eval: %d / %d]'%(index, num_images))
+            if (index+1) % 500 == 0:
+                print('[Eval: %d / %d]'%(index+1, num_images))
 
             # load an image
             image, id = self.dataset.pull_image(index)
